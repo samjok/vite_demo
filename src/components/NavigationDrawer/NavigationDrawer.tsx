@@ -1,5 +1,7 @@
 import * as React from "react";
 import NavigationBar from "../NavigationBar";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import SettingsIcon from "@mui/icons-material/Settings";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -10,7 +12,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
+import { COLOR_MAIN_LIGHT } from "../../theme/colors";
 
 type NavigationDrawerProps = {
   toggleMenu: (newOpen: boolean) => () => void;
@@ -24,11 +27,11 @@ export default function NavigationDrawer({
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleMenu(false)}>
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
+        {["Page 1", "Page 2", "Page 3"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <AccountBalanceIcon />
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
@@ -37,22 +40,27 @@ export default function NavigationDrawer({
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key={"settings"} disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary={"Settings"} />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
 
   return (
-    <Drawer open={open} onClose={toggleMenu(false)}>
+    <Drawer
+      variant="persistent"
+      anchor="left"
+      open={open}
+      onClose={toggleMenu(false)}
+      hideBackdrop={true}
+      sx={{ backgroundColor: COLOR_MAIN_LIGHT }}
+    >
       {DrawerList}
     </Drawer>
   );
