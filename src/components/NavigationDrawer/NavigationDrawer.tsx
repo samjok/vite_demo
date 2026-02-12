@@ -1,5 +1,3 @@
-import * as React from "react";
-import NavigationBar from "../NavigationBar";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Box from "@mui/material/Box";
@@ -10,9 +8,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { Grid, Typography } from "@mui/material";
 import { COLOR_MAIN_LIGHT } from "../../theme/colors";
 
 type NavigationDrawerProps = {
@@ -27,7 +22,7 @@ export default function NavigationDrawer({
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleMenu(false)}>
       <List>
-        {["Page 1", "Page 2", "Page 3"].map((text, index) => (
+        {["Page 1", "Page 2", "Page 3"].map((text) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
               <ListItemIcon>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import NavigationBar from "../../components/NavigationBar";
 import NavigationDrawer from "../../components/NavigationDrawer";
 import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
 import LoginForm from "../../components/LoginForm";
 
 export default function LoginPage() {

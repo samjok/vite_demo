@@ -1,4 +1,4 @@
-import { useState, FormEvent, ChangeEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import "./LoginForm.css";
 
 interface LoginFormData {
