@@ -1,5 +1,6 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import "./LoginForm.css";
+import { mockLogin } from "../../mocks/auth";
 
 interface LoginFormData {
   email: string;
@@ -78,6 +79,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
     try {
       if (onSubmit) {
         await onSubmit(formData);
+      } else {
+        // use mocked backend when no onSubmit prop provided
+        const resp = await mockLogin(formData.email, formData.password);
+        // store token when rememberMe is checked
+        if (formData.rememberMe) {
+          try {
+            localStorage.setItem("auth_token", resp.token);
+          } catch (err) {
+            // ignore localStorage errors in some environments
+          }
+        }
       }
       setSuccessMessage("Login successful!");
       // Reset form
@@ -86,6 +98,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         password: "",
         rememberMe: false,
       });
+      // navigate to dashboard
+      try {
+        window.history.pushState({}, "", "/dashboard");
+        window.dispatchEvent(new PopStateEvent("popstate"));
+      } catch (err) {
+        // ignore for environments without history
+      }
     } catch (error) {
       setErrors({
         email: error instanceof Error ? error.message : "Login failed",
